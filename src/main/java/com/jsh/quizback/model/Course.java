@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -40,7 +39,7 @@ public class Course {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateCourse;
 	
-	// RELACIÓN TAG-COURSE N-M
+	// RELACIÓN COURSE-USER N-M
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
     	      name="COURSE_USER",

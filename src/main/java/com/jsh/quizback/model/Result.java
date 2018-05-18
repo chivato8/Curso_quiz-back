@@ -20,6 +20,7 @@ import lombok.Setter;
 public class Result {
 
 	public static final String FIELD_USER = "user";
+	public static final String FIELD_QUIZ = "quiz";
 
 	@Id
 	@GeneratedValue
@@ -28,9 +29,14 @@ public class Result {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateResult;
 
-	//RELACIÓN USER-RESULT 1-N
+	//RELACIÓN USER-RESULT N-1
 	@JoinColumn(name = "id_User")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
+	
+	//RELACIÓN QUIZ-RESULT N-1
+	@JoinColumn(name = "id_Quiz")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Quiz quiz;
 
 }

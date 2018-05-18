@@ -51,4 +51,8 @@ public class Quiz {
     	      inverseJoinColumns=@JoinColumn(name="id_Tag"))
     private Collection<Tag> tag;
     
+ // RELACIÓN QUIZ-RESULT 1-N
+  	@OneToMany(fetch = FetchType.LAZY, mappedBy = Result.FIELD_QUIZ)
+  	private List<Result> result;
+    
 }

@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
@@ -18,23 +20,20 @@ import lombok.Setter;
 @Getter
 @Entity
 
-public class Tag {
+public class Question {
 
+	public static final String FIELD_TAG = "tag";
+	
+	
 	@Id
 	@GeneratedValue
-	private Integer idTag;
-	
+	private Integer idQuestion;
+
 	@Column(nullable = false)
-	private String nameTag;
+	private String Text_Quest;
 	
-	private String descriptionTag;
-	
-	// RELACIÓN TAG-QUIZ N-M
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy=Quiz.FIELD_TAG)
-	private Collection<Quiz> quiz;
-	
-	// RELACIÓN TAG-QUESTION 1-N
-  	@OneToMany(fetch = FetchType.LAZY, mappedBy = Question.FIELD_TAG)
-  	private List<Question> question;
-	
+	//RELACIÓN TAG-QUESTION N-1
+		@JoinColumn(name = "id_Tag")
+		@ManyToOne(fetch = FetchType.LAZY)
+		private Tag tag;
 }
