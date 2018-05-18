@@ -2,6 +2,8 @@ package com.jsh.quizback.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,7 +29,8 @@ public class Answer {
 	private String textAnswer;
 	
 	@Column(nullable = false)
-	private Boolean correctAnswer; //rightAnswer
+	@Enumerated(EnumType.STRING)
+	private Correct correctAnswer; //rightAnswer
 	
 	//RELACIÓN ANSWER-QUESTION N-1
   	@JoinColumn(name = "id_Question")

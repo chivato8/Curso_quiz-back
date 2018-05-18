@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,7 +36,8 @@ public class Course {
 	private String nameCourse;
 	
 	@Column(nullable = false)
-	private Integer levelCourse;
+	@Enumerated(EnumType.STRING)
+	private Level levelCourse;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateCourse;

@@ -2,6 +2,7 @@ package com.jsh.quizback.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,9 @@ public class Result {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateResult;
+	
+	@Column(nullable = false)
+	private Integer valueResult;
 
 	//RELACIÓN USER-RESULT N-1
 	@JoinColumn(name = "id_User")
