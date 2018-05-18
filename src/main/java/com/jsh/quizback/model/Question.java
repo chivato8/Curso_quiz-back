@@ -48,10 +48,14 @@ public class Question {
     	      inverseJoinColumns=@JoinColumn(name="id_Quiz"))
     private Collection<Quiz> quiz;
     
-  //RELACIÓN QUESTION-DIFFICULTY N-1
+    //RELACIÓN QUESTION-DIFFICULTY N-1
   	@JoinColumn(name = "id_Difficulty")
   	@ManyToOne(fetch = FetchType.LAZY)
   	private Difficulty difficulty;
+  	
+ // RELACIÓN QUESTION-ANSWER 1-N
+   	@OneToMany(fetch = FetchType.LAZY, mappedBy = Answer.FIELD_QUESTION)
+   	private List<Answer> answer;
     
     
 }
