@@ -1,7 +1,5 @@
 package com.jsh.quizback.dao;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -20,10 +18,10 @@ public interface UserDao extends PagingAndSortingRepository<User,Integer> {
 	 * @return
 	 * 
 	 */
-	@Query(value ="select u "
-			+"from User as u "
-			+"where u.name_user = ?1")
-	public List<User> findByName(String nameUser);
+	@Query(value = "select u "
+			+ "from User as u "
+			+ "where u.name_user = ?1")
+	public User findByName(String nameUser);
 	
 	/**
 	 * SELECT *
@@ -33,9 +31,9 @@ public interface UserDao extends PagingAndSortingRepository<User,Integer> {
 	 * @return
 	 * 
 	 */
-	@Query(value ="select u "
-			+"from User as u "
-			+"where u.email = :email")
-	User findByEmailAddress(@Param(value = "email") String email);
+	@Query(value = "select u "
+			+ "from User as u "
+			+ "where u.email = :email")
+	public User findByEmailAddress(@Param(value = "email") String email);
 	
 }

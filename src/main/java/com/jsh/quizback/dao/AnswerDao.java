@@ -20,9 +20,9 @@ public interface AnswerDao extends PagingAndSortingRepository<Answer,Integer> {
 	 * @return
 	 * 
 	 */
-	@Query(value ="select * "
-			+"from answer "
-			+"where id_question = ?1;", nativeQuery=true)
+	@Query(value = "select * "
+			+ "from answer "
+			+ "where id_question = ?1;", nativeQuery=true)
 	public List<Answer> findByIdQuestion(Integer idQuestion);
 	
 	/**
@@ -34,9 +34,9 @@ public interface AnswerDao extends PagingAndSortingRepository<Answer,Integer> {
 	 * @return
 	 * 
 	 */
-	@Query(value ="select a.id_answer "
-			+"from Answer as a "
-			+"where a.id_question = :idquestion AND a.correct_answer = :right")
+	@Query(value = "select a.id_answer "
+			+ "from Answer as a "
+			+ "where a.id_question = :idquestion AND a.correct_answer = :right")
 	public Integer findByIdQuestionAndCorrectAnswer(@Param(value = "idquestion") Integer idQuestion, @Param(value = "right") String right);
 	
 	
