@@ -23,7 +23,7 @@ public class User {
 	@GeneratedValue
 	private Integer idUser;
 
-	@Column(nullable = false)
+	@Column(unique = true, nullable = false)
 	private String nameUser;
 
 	@Column(unique = true, nullable = false)

@@ -33,7 +33,7 @@ public class Question {
 	private Integer idQuestion;
 
 	@Column(nullable = false)
-	private String Text_Quest;
+	private String textQuestion;
 	
 	//RELACIÓN TAG-QUESTION N-1
 	@JoinColumn(name = "id_Tag")
