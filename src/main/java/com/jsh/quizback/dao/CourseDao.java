@@ -14,7 +14,7 @@ import com.jsh.quizback.model.Course;
 public interface CourseDao extends PagingAndSortingRepository<Course,Integer> {
 
 	/**
-	 * SELECT name_coure
+	 * SELECT *
 	 * FROM 'COURSE'
 	 * WHERE 'id_course'="param";
 	 * @param idCourse
@@ -42,10 +42,10 @@ public interface CourseDao extends PagingAndSortingRepository<Course,Integer> {
 	public List<Course> findByDate(@Param(value = "iniDate") Date iniDate, @Param(value = "endDate") Date endDate);
 	
 	/**
-	 * SELECT name_coure
+	 * SELECT *
 	 * FROM 'COURSE'
-	 * WHERE 'id_course'="param";
-	 * @param idCourse
+	 * WHERE 'level_course'="param";
+	 * @param levelCourse
 	 * @return
 	 * 
 	 */
