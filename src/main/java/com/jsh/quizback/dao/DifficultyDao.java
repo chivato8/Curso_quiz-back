@@ -23,4 +23,17 @@ public interface DifficultyDao extends PagingAndSortingRepository<Difficulty,Int
 			+ "from difficulty as d"
 			+ "where c.level_difficulty = :levelDifficulty")
 	public Integer findByLevelDifficulty(@Param(value = "levelDifficulty") String levelDifficulty);
+	
+	/**
+	 * SELECT level_difficulty
+	 * FROM 'DIFFICULTY'
+	 * WHERE 'id_difficulty'="param";
+	 * @param idDifficulty
+	 * @return
+	 * 
+	 */
+	@Query(value ="select d.level_difficulty "
+			+ "from difficulty as d"
+			+ "where c.id_difficulty = :idDifficulty")
+	public String findByIdDifficulty(@Param(value = "idDifficulty") Integer idDifficulty);
 }

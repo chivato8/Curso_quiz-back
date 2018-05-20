@@ -1,5 +1,7 @@
 package com.jsh.quizback.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -35,5 +37,20 @@ public interface UserDao extends PagingAndSortingRepository<User,Integer> {
 			+ "from User as u "
 			+ "where u.email = :email")
 	public User findByEmailAddress(@Param(value = "email") String email);
+	
+	/**
+	 * SELECT *
+	 * FROM 'USER'
+	 * JOIN 'COURSE_USER' ON 'USER.id_user' = 'COURSE_USER.id_user'
+	 * WHERE 'COURSE_USER.id_course'="param";
+	 * @param idCourse
+	 * @return
+	 * 
+	 */
+	@Query(value="select u"
+			+ "from user as u "
+			+ "join course_user on u.id_user = course_user.id_user "
+			+ "where course_user.id_course= :idCourse")
+	public List<User> findByIdCourseUser(@Param(value = "idCourse") Integer idCourse);
 	
 }

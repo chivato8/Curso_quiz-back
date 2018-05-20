@@ -54,4 +54,19 @@ public interface CourseDao extends PagingAndSortingRepository<Course,Integer> {
 			+ "where c.level_course= :levelCourse")
 	public List<Course> findByLevel(@Param(value = "levelCourse") String levelCourse);
 	
+	/**
+	 * SELECT *
+	 * FROM 'COURSE'
+	 * JOIN 'COURSE_USER' ON 'COURSE.id_course' = 'COURSE_USER.id_course'
+	 * WHERE 'COURSE_USER.id_user'="param";
+	 * @param idUser
+	 * @return
+	 * 
+	 */
+	@Query(value="select c"
+			+ "from course as c "
+			+ "join course_user on c.id_course = course_user.id_course "
+			+ "where course_user.id_user = :idUser")
+	public List<Course> findByIdUserCourse(@Param(value = "idUser") Integer idUser);
+	
 }
