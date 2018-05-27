@@ -26,11 +26,20 @@ public class Difficulty {
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	private Level lavelDifficulty;
+	private Level levelDifficulty;
 
 	
 	 // RELACIÓN DIFFICULTY-QUESTION 1-N
   	@OneToMany(fetch = FetchType.LAZY, mappedBy = Question.FIELD_DIFFICULTY)
   	private List<Question> question;
 	
+  	public void setLevelDifficuclty(String string) {
+		if(string==Level.H.toString())
+			this.levelDifficulty=Level.H;
+		else
+			if(string==Level.L.toString())
+				this.levelDifficulty=Level.L;
+			else
+				this.levelDifficulty=Level.M;
+	}
 }

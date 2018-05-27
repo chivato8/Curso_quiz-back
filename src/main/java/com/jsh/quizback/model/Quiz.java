@@ -41,6 +41,9 @@ public class Quiz {
 	@Enumerated(EnumType.STRING)
 	private Level levelQuiz;
 	
+	@Column(nullable = false)
+	private Integer numQuestion;
+	
 	private String descriptionQuiz;
 	
 	// RELACIÓN TAG-QUIZ N-M
@@ -58,5 +61,16 @@ public class Quiz {
   	// RELACIÓN QUESTION-QUIZ N-M
  	@ManyToMany(fetch = FetchType.LAZY, mappedBy=Question.FIELD_QUIZ)
  	private Collection<Question> question;
+ 	
+ 	
+ 	public void setLevelQuiz(String string) {
+		if(string==Level.H.toString())
+			this.levelQuiz=Level.H;
+		else
+			if(string==Level.L.toString())
+				this.levelQuiz=Level.L;
+			else
+				this.levelQuiz=Level.M;
+	}
     
 }

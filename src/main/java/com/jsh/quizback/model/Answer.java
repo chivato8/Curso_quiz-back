@@ -36,6 +36,13 @@ public class Answer {
   	@JoinColumn(name = "id_Question")
   	@ManyToOne(fetch = FetchType.LAZY)
   	private Question question;
+
+	public void setCorrectAnswer(String string) {
+		if(string==Correct.R.toString())
+		this.correctAnswer=Correct.R;
+		else
+		this.correctAnswer=Correct.W;
+	}
 	
 	
 

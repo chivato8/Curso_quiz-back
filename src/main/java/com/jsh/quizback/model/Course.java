@@ -49,5 +49,16 @@ public class Course {
     	      joinColumns=@JoinColumn(name="id_Course"),
     	      inverseJoinColumns=@JoinColumn(name="id_User"))
     private Collection<User> user;
+    
+    
+    public void setLevelCourse(String string) {
+		if(string==Level.H.toString())
+			this.levelCourse=Level.H;
+		else
+			if(string==Level.L.toString())
+				this.levelCourse=Level.L;
+			else
+				this.levelCourse=Level.M;
+	}
 	
 }
