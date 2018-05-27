@@ -21,4 +21,10 @@ public class ResultDTO implements Serializable {
 	@Mapping(value="value")
 	private Integer valueResult;
 	
+	@Mapping(value="idQuiz")
+	private Integer idQuiz;
+	
+	@Mapping(value="idUser")
+	private Integer idUser;
+	
 }

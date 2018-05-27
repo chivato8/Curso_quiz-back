@@ -17,4 +17,10 @@ public class QuestionDTO implements Serializable {
 	@Mapping(value="text")
 	private String textQuestion;
 	
+	@Mapping(value="idTag")
+	private Integer idTag;
+	
+	@Mapping(value="idDifficulty")
+	private Integer idDifficulty;
+	
 }

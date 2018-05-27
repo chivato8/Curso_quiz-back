@@ -21,5 +21,8 @@ public class UserDTO implements Serializable{
 	@Mapping(value="email")
 	private String emailUser;
 	
+	@Mapping(value="password")
+	private String passwordUser;
+	
 	
 }

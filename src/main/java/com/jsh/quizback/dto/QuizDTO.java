@@ -25,4 +25,7 @@ public class QuizDTO implements Serializable {
 	@Mapping(value="description")
 	private String descriptionQuiz;
 	
+	@Mapping(value="numQuestion")
+	private Integer numQuestion;
+	
 }

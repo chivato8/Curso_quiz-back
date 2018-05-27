@@ -19,4 +19,7 @@ public class AnswerDTO implements Serializable{
 	
 	@Mapping(value = "correct")
 	private String correctAnswer;
+	
+	@Mapping(value = "idquestion")
+	private Integer idQuestion;
 }

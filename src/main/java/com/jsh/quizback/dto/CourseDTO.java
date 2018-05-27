@@ -23,4 +23,5 @@ public class CourseDTO implements Serializable {
 	
 	@Mapping(value="date")
 	private Date dateCourse;
+	
 }
