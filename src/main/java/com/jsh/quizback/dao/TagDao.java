@@ -22,8 +22,8 @@ public interface TagDao extends PagingAndSortingRepository<Tag,Integer> {
 	 */
 	@Query(value ="select t "
 			+ "from tag as t"
-			+ "where t.id_tag= ?1")
-	public Tag findByIdTag(Integer idTag);
+			+ "where t.idTag= ?1", nativeQuery=true)
+	public Tag findByIdTag(@Param(value = "idTag") Integer idTag);
 	
 	/**
 	 * SELECT *
@@ -36,8 +36,8 @@ public interface TagDao extends PagingAndSortingRepository<Tag,Integer> {
 	 */
 	@Query(value="select t"
 			+ "from tag as t "
-			+ "join quiz_tag on t.id_tag = quiz_tag.id_tag "
-			+ "where quiz_tag.id_quiz = :idQuiz")
+			+ "join quiz_tag on t.idTag = quiz_tag.idTag "
+			+ "where quiz_tag.idQuiz = ?1", nativeQuery=true)
 	public List<Tag> findByIdQuizTag(@Param(value = "idQuiz") Integer idQuiz);
 	
 	

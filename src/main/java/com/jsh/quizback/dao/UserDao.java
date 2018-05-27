@@ -15,6 +15,19 @@ public interface UserDao extends PagingAndSortingRepository<User,Integer> {
 	/**
 	 * SELECT *
 	 * FROM 'USER'
+	 * WHERE 'id_user'="param";
+	 * @param idUser
+	 * @return
+	 * 
+	 */
+	@Query(value = "select u "
+			+ "from User as u "
+			+ "where u.idUser = ?1")
+	public User findByIdUser(@Param(value = "idUser")Integer idUser);
+	
+	/**
+	 * SELECT *
+	 * FROM 'USER'
 	 * WHERE 'name_user'="param";
 	 * @param nameUser
 	 * @return
@@ -22,8 +35,8 @@ public interface UserDao extends PagingAndSortingRepository<User,Integer> {
 	 */
 	@Query(value = "select u "
 			+ "from User as u "
-			+ "where u.name_user = ?1")
-	public User findByName(String nameUser);
+			+ "where u.nameUser = ?1")
+	public List<User> findByName(@Param(value = "nameUser") String nameUser);
 	
 	/**
 	 * SELECT *
@@ -35,8 +48,8 @@ public interface UserDao extends PagingAndSortingRepository<User,Integer> {
 	 */
 	@Query(value = "select u "
 			+ "from User as u "
-			+ "where u.email = :email")
-	public User findByEmailAddress(@Param(value = "email") String email);
+			+ "where u.emailUser = ?1")
+	public User findByEmailUser(@Param(value = "email") String email);
 	
 	/**
 	 * SELECT *
@@ -47,10 +60,10 @@ public interface UserDao extends PagingAndSortingRepository<User,Integer> {
 	 * @return
 	 * 
 	 */
-	@Query(value="select u"
+	@Query(value="select u "
 			+ "from user as u "
-			+ "join course_user on u.id_user = course_user.id_user "
-			+ "where course_user.id_course= :idCourse")
+			+ "join course_user on u.idUser = course_user.idUser "
+			+ "where course_user.idCourse= ?1", nativeQuery=true)
 	public List<User> findByIdCourseUser(@Param(value = "idCourse") Integer idCourse);
 	
 }

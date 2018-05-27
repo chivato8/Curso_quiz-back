@@ -23,8 +23,8 @@ public interface CourseDao extends PagingAndSortingRepository<Course,Integer> {
 	 */
 	@Query(value ="select c "
 			+ "from course as c"
-			+ "where c.id_course= ?1")
-	public Course findByIdCourse(Integer idCourse);
+			+ "where c.idCourse= ?1", nativeQuery=true)
+	public Course findByIdCourse(@Param(value = "idCourse")Integer idCourse);
 	
 	
 	/**
@@ -38,7 +38,7 @@ public interface CourseDao extends PagingAndSortingRepository<Course,Integer> {
 	 */
 	@Query(value ="select c "
 			+ "from course as c"
-			+ " where c.date_course BETWEEN :iniDate AND :endDate")
+			+ " where c.dateCourse BETWEEN ?1 AND ?2", nativeQuery=true)
 	public List<Course> findByDate(@Param(value = "iniDate") Date iniDate, @Param(value = "endDate") Date endDate);
 	
 	/**
@@ -51,7 +51,7 @@ public interface CourseDao extends PagingAndSortingRepository<Course,Integer> {
 	 */
 	@Query(value ="select c "
 			+ "from course as c"
-			+ "where c.level_course= :levelCourse")
+			+ "where c.levelCourse= ?1", nativeQuery=true)
 	public List<Course> findByLevel(@Param(value = "levelCourse") String levelCourse);
 	
 	/**
@@ -65,8 +65,8 @@ public interface CourseDao extends PagingAndSortingRepository<Course,Integer> {
 	 */
 	@Query(value="select c"
 			+ "from course as c "
-			+ "join course_user on c.id_course = course_user.id_course "
-			+ "where course_user.id_user = :idUser")
+			+ "join course_user on c.idCourse = course_user.idCourse "
+			+ "where course_user.idUser = ?1", nativeQuery=true)
 	public List<Course> findByIdUserCourse(@Param(value = "idUser") Integer idUser);
 	
 }

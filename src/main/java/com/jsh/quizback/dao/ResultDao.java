@@ -22,7 +22,7 @@ public interface ResultDao extends PagingAndSortingRepository<Result,Integer> {
 	 */
 	@Query(value="select r"
 			+ "from result as r "
-			+ "where r.id_user = :idUser")
+			+ "where r.idUser = ?1", nativeQuery=true)
 	public List<Result> findByIdUser(@Param(value = "idUser")Integer idUser);
 	
 	/**
@@ -36,6 +36,6 @@ public interface ResultDao extends PagingAndSortingRepository<Result,Integer> {
 	 */
 	@Query(value="select r"
 			+ "from result as r "
-			+ "where r.id_user = :idUser and r.quiz = :idQuiz")
+			+ "where r.idUser = ?1 and r.idQuiz = ?2", nativeQuery=true)
 	public List<Result> findByIdUserAndIdQuiz(@Param(value = "idUser")Integer idUser,@Param(value = "idQuiz")Integer idQuiz);
 }
