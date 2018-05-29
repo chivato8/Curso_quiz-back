@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -29,7 +30,7 @@ public class Question {
 	
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idQuestion;
 
 	@Column(nullable = false)
@@ -53,7 +54,7 @@ public class Question {
   	@ManyToOne(fetch = FetchType.LAZY)
   	private Difficulty difficulty;
   	
- // RELACIÓN QUESTION-ANSWER 1-N
+  	// RELACIÓN QUESTION-ANSWER 1-N
    	@OneToMany(fetch = FetchType.LAZY, mappedBy = Answer.FIELD_QUESTION)
    	private List<Answer> answer;
     
