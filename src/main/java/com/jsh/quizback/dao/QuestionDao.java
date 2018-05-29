@@ -21,20 +21,20 @@ public interface QuestionDao extends PagingAndSortingRepository<Question,Integer
 	 * 
 	 */
 	@Query(value ="select q "
-			+ "from question as q"
-			+ "where c.idQuestion = ?1")
+			+ "from Question as q "
+			+ "where q.idQuestion = ?1")
 	public Question findByIdQuestion(@Param(value = "idQuestion") Integer idQuestion);
 	
 	
-	@Query(value ="select q "
-			+ "from question as q"
-			+ "where c.idTag = ?1")
-	public Question findByIdTag(@Param(value = "idTag") Integer idTag);
+	@Query(value ="SELECT * "
+			+ "FROM QUESTION "
+			+ "WHERE id_tag = ?1", nativeQuery=true)
+	public List<Question> findByIdTag(@Param(value = "idTag") Integer idTag);
 	
-	@Query(value ="select q "
-			+ "from question as q"
-			+ "where c.idDifficulty = ?1")
-	public Question findByIdDifficulty(@Param(value = "idDifficulty") Integer idDifficulty);
+	@Query(value ="SELECT * "
+			+ "FROM QUESTION "
+			+ "WHERE id_difficulty = ?1", nativeQuery=true)
+	public List<Question> findByIdDifficulty(@Param(value = "idDifficulty") Integer idDifficulty);
 			
 	/**
 	 * SELECT *
@@ -45,9 +45,9 @@ public interface QuestionDao extends PagingAndSortingRepository<Question,Integer
 	 * @return
 	 * 
 	 */
-	@Query(value="select q"
-			+ "from question as q "
-			+ "where q.idDifficulty = ?1 and q.idTag = ?2")
+	@Query(value="SELECT *"
+			+ "FROM QUESTION "
+			+ "WHERE id_difficulty = ?1 and id_tag = ?2", nativeQuery=true)
 	public List<Question> findByIdDifficultyAndIdTag(@Param(value = "idDifficulty")Integer idDifficulty,@Param(value = "idTag")Integer idTag);
 	
 	/**
@@ -62,7 +62,7 @@ public interface QuestionDao extends PagingAndSortingRepository<Question,Integer
 	@Query(value="select q"
 			+ "from question as q "
 			+ "join question_quiz on q.idQuestion = question_quiz.idQuestion "
-			+ "where question_quiz.idQuiz = ?1")
+			+ "where question_quiz.idQuiz = ?1", nativeQuery=true)
 	public List<Question> findByIdQuizQuestion(@Param(value = "idQuiz") Integer idQuiz);
 	
 }

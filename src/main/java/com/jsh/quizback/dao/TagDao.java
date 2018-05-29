@@ -21,9 +21,14 @@ public interface TagDao extends PagingAndSortingRepository<Tag,Integer> {
 	 * 
 	 */
 	@Query(value ="select t "
-			+ "from tag as t"
-			+ "where t.idTag= ?1", nativeQuery=true)
+			+ "from Tag as t "
+			+ "where t.idTag = ?1")
 	public Tag findByIdTag(@Param(value = "idTag") Integer idTag);
+	
+	@Query(value ="select t "
+			+ "from Tag as t "
+			+ "where t.nameTag = ?1", nativeQuery=true)
+	public Tag findByName(@Param(value = "nameTag") String nameTag);
 	
 	/**
 	 * SELECT *
@@ -35,7 +40,7 @@ public interface TagDao extends PagingAndSortingRepository<Tag,Integer> {
 	 * 
 	 */
 	@Query(value="select t"
-			+ "from tag as t "
+			+ "from Tag as t "
 			+ "join quiz_tag on t.idTag = quiz_tag.idTag "
 			+ "where quiz_tag.idQuiz = ?1", nativeQuery=true)
 	public List<Tag> findByIdQuizTag(@Param(value = "idQuiz") Integer idQuiz);

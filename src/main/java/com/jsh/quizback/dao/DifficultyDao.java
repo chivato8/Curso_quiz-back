@@ -19,10 +19,10 @@ public interface DifficultyDao extends PagingAndSortingRepository<Difficulty,Int
 	 * @return
 	 * 
 	 */
-	@Query(value ="select d.id_difficulty "
-			+ "from difficulty as d"
-			+ "where c.levelDifficulty = ?1", nativeQuery=true)
-	public Integer findByLevelDifficulty(@Param(value = "levelDifficulty") String levelDifficulty);
+	@Query(value ="select d "
+			+ "from Difficulty as d "
+			+ "where d.levelDifficulty = ?1", nativeQuery=true)
+	public Difficulty findByLevelDifficulty(@Param(value = "levelDifficulty") String levelDifficulty);
 	
 	/**
 	 * SELECT level_difficulty
@@ -32,8 +32,8 @@ public interface DifficultyDao extends PagingAndSortingRepository<Difficulty,Int
 	 * @return
 	 * 
 	 */
-	@Query(value ="select d.levelDifficulty "
-			+ "from difficulty as d"
-			+ "where c.idDifficulty = ?1", nativeQuery=true)
-	public String findByIdDifficulty(@Param(value = "idDifficulty") Integer idDifficulty);
+	@Query(value ="select d "
+			+ "from Difficulty as d "
+			+ "where d.idDifficulty = ?1")
+	public Difficulty findByIdDifficulty(@Param(value = "idDifficulty") Integer idDifficulty);
 }
