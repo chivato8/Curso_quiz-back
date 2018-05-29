@@ -55,7 +55,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/idCourse={idCourse}")
-	public List<UserDTO> findByIdCourseUser(Integer idCourse)throws NotFoundException{
+	public List<UserDTO> findByIdCourseUser(@PathVariable Integer idCourse)throws NotFoundException{
 		log.info("Recuperando Usuario por IdCourse = " + idCourse);
 		return userservice.findByIdCourseUser(idCourse);
 	}
