@@ -2,6 +2,7 @@ package com.jsh.quizback.model;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +10,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -29,7 +32,7 @@ public class Course {
 	
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idCourse;
 	
 	@Column(nullable = false)
@@ -50,6 +53,9 @@ public class Course {
     	      inverseJoinColumns=@JoinColumn(name="id_User"))
     private Collection<User> user;
     
+    // RELACIÓN COURSE-QUIZ 1-N
+   	@OneToMany(fetch = FetchType.LAZY, mappedBy = Quiz.FIELD_COURSE)
+   	private List<Quiz> quiz;
     
     public void setLevelCourse(String string) {
 		if(string==Level.H.toString())

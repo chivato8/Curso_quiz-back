@@ -10,10 +10,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,10 +30,11 @@ import lombok.Setter;
 public class Quiz {
 
 	public static final String FIELD_TAG = "tag";
+	public static final String FIELD_COURSE = "course";
 
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idQuiz;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -62,6 +65,10 @@ public class Quiz {
  	@ManyToMany(fetch = FetchType.LAZY, mappedBy=Question.FIELD_QUIZ)
  	private Collection<Question> question;
  	
+ 	//RELACIÓN ANSWER-QUIZ N-1
+  	@JoinColumn(name = "id_Course")
+  	@ManyToOne(fetch = FetchType.LAZY)
+  	private Course course;
  	
  	public void setLevelQuiz(String string) {
 		if(string==Level.H.toString())
