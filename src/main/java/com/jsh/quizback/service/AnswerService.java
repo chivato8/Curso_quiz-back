@@ -8,55 +8,18 @@ import com.jsh.quizback.model.Answer;
 
 public interface AnswerService {
 
-	/**
-	 * Busqueda de todos los Answer existentes
-	 * @param page
-	 * @param size
-	 * @return
-	 */
 	public List<AnswerDTO> findAll(Integer page, Integer size);
 	
-	/**
-	 * Buscamos por idAnswer
-	 * @param idAnswer
-	 * @return
-	 * @throws NotFoundException
-	 */
-	public AnswerDTO findById(Integer idAnswer) throws NotFoundException;
+	public Answer findByIdAnswer(Integer idAnswer) throws NotFoundException;
 	
-	/**
-	 * Buscamos por idAnswer
-	 * @param idAnswer
-	 * @return
-	 * @throws NotFoundException
-	 */
-	public Answer findOne(Integer idAnswer) throws NotFoundException;
+	public Answer findByIdQuestion(Integer idQuestion)throws NotFoundException;
 	
-	/**
-	 * Buscamos por idQuestion
-	 * @param idQuestion
-	 * @return
-	 */
-	public List<Answer> findByIdQuestion(Integer idQuestion);
+	public Answer findByIdQuestionCorrectAnswer(Integer idQuestion, String right) throws NotFoundException;
 	
-	/**
-	 * Crear Respuesta
-	 * @param a
-	 * @return
-	 */
-	public AnswerDTO create(AnswerDTO a);
+	public AnswerDTO create(AnswerDTO a)throws NotFoundException;
 	
-	/**
-	 * Actualizar una Answer
-	 * @param a
-	 */
-	public void update(AnswerDTO a);
+	public void update(AnswerDTO a)throws NotFoundException;
 	
-	/**
-	 * Borramos una Answer
-	 * @param idAnswer
-	 * @throws NotFoundException
-	 */
 	public void delete(Integer idAnswer) throws NotFoundException;
 	
 }

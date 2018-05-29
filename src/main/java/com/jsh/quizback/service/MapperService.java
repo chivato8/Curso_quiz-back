@@ -20,35 +20,37 @@ import com.jsh.quizback.model.User;
 
 public interface MapperService {
 
-	public Answer map(AnswerDTO dto) throws NotFoundException;
+	public Answer map(AnswerDTO dto);
 	
 	public AnswerDTO map(Answer a);
 	
-	public Course map(CourseDTO dto) throws NotFoundException;
+	public Course map(CourseDTO dto);
 	
 	public CourseDTO map(Course c);
 	
-	public Difficulty map(DifficultyDTO dto) throws NotFoundException;
+	public Difficulty map(DifficultyDTO dto);
 	
 	public DifficultyDTO map (Difficulty d);
 	
-	public Question mpa(QuestionDTO dto) throws NotFoundException;
+	public Question map(QuestionDTO dto) throws NotFoundException;
 	
 	public QuestionDTO map(Question q);
 	
-	public Quiz mpa(QuizDTO dto) throws NotFoundException;
+	public Quiz map(QuizDTO dto);
 	
 	public QuizDTO map(Quiz q);
 	
-	public Result map(ResultDTO dto) throws NotFoundException;
+	public Result map(ResultDTO dto);
 	
 	public ResultDTO map(Result r);
 	
-	public Tag map(TagDTO dto) throws NotFoundException;
+	public Tag map(TagDTO dto);
 	
-	public TagDTO mpa(Tag t);
+	public TagDTO map(Tag t);
 	
-	public User mpa(UserDTO dto)throws NotFoundException;
+	public User map(UserDTO dto);
 	
 	public UserDTO map(User u);
+
+
 }
