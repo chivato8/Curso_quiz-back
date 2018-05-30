@@ -37,7 +37,7 @@ public class Quiz {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idQuiz;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date dateQuiz;
 	
 	@Column(nullable = false)
@@ -71,13 +71,18 @@ public class Quiz {
   	private Course course;
  	
  	public void setLevelQuiz(String string) {
-		if(string==Level.H.toString())
+		if(string.equals(Level.H.toString())) {
 			this.levelQuiz=Level.H;
+		}
 		else
-			if(string==Level.L.toString())
+		{
+			if(string.equals(Level.L.toString())) {
 				this.levelQuiz=Level.L;
-			else
+			}
+			else {
 				this.levelQuiz=Level.M;
+			}
+		}
 	}
     
 }

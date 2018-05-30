@@ -28,7 +28,7 @@ public class Result {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idResult;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date dateResult;
 	
 	@Column(nullable = false)

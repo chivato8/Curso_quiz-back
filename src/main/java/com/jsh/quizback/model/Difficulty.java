@@ -34,13 +34,18 @@ public class Difficulty {
   	@OneToMany(fetch = FetchType.LAZY, mappedBy = Question.FIELD_DIFFICULTY)
   	private List<Question> question;
 	
-  	public void setLevelDifficuclty(String string) {
-		if(string==Level.H.toString())
+  	public void setLevelDifficulty(String string) {
+		if(string.equals(Level.H.toString())) {
 			this.levelDifficulty=Level.H;
+		}
 		else
-			if(string==Level.L.toString())
+		{
+			if(string.equals(Level.L.toString())) {
 				this.levelDifficulty=Level.L;
-			else
+			}
+			else {
 				this.levelDifficulty=Level.M;
+			}
+		}
 	}
 }

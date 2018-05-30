@@ -42,7 +42,7 @@ public class Course {
 	@Enumerated(EnumType.STRING)
 	private Level levelCourse;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date dateCourse;
 	
 	// RELACIÓN COURSE-USER N-M
