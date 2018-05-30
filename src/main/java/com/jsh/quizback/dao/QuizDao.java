@@ -21,11 +21,15 @@ public interface QuizDao extends PagingAndSortingRepository<Quiz,Integer> {
 	 * @return
 	 * 
 	 */
-	@Query(value ="select q "
-			+ "from quiz as q"
-			+ "where q.idQuiz= ?1", nativeQuery=true)
+	@Query(value ="SELECT * "
+			+ "FROM QUIZ "
+			+ "WHERE id_quiz= ?1", nativeQuery=true)
 	public Quiz findByIdQuiz(@Param(value = "idQuiz") Integer idQuiz);
 	
+	@Query(value ="SELECT * "
+			+ "FROM QUIZ "
+			+ "WHERE id_course= ?1", nativeQuery=true)
+	public List<Quiz> findByIdCourse(@Param(value = "idCourse") Integer idCourse);
 	
 	/**
 	 * SELECT *
@@ -36,9 +40,9 @@ public interface QuizDao extends PagingAndSortingRepository<Quiz,Integer> {
 	 * @return
 	 * 
 	 */
-	@Query(value ="select q "
-			+ "from quiz as q"
-			+ " where q.dateQuiz BETWEEN ?1 AND ?2", nativeQuery=true)
+	@Query(value ="SELECT * "
+			+ "FROM QUIZ "
+			+ " WHERE date_Quiz BETWEEN ?1 AND ?2", nativeQuery=true)
 	public List<Quiz> findByDate(@Param(value = "iniDate") Date iniDate, @Param(value = "endDate") Date endDate);
 	
 	/**
@@ -49,9 +53,9 @@ public interface QuizDao extends PagingAndSortingRepository<Quiz,Integer> {
 	 * @return
 	 * 
 	 */
-	@Query(value ="select q "
-			+ "from quiz as q"
-			+ "where q.levelQuiz= ?1", nativeQuery=true)
+	@Query(value ="SELECT * "
+			+ "FROM QUIZ "
+			+ "WHERE level_Quiz= ?1", nativeQuery=true)
 	public List<Quiz> findByLevel(@Param(value = "levelQuiz") String levelQuiz);
 	
 	/**
@@ -63,10 +67,10 @@ public interface QuizDao extends PagingAndSortingRepository<Quiz,Integer> {
 	 * @return
 	 * 
 	 */
-	@Query(value="select q"
-			+ "from quiz as q "
-			+ "join quiz_tag on q.idQuiz = quiz_tag.idQuiz "
-			+ "where quiz_tag.idTag = ?1", nativeQuery=true)
+	@Query(value="SELECT * "
+			+ "FROM QUIZ as q "
+			+ "JOIN QUIZ_TAG on q.id_Quiz = QUIZ_TAG.id_Quiz "
+			+ "WHERE QUIZ_TAG.id_Tag = ?1", nativeQuery=true)
 	public List<Quiz> findByIdTagQuiz(@Param(value = "idTag") Integer idTag);
 	
 	

@@ -60,10 +60,10 @@ public interface UserDao extends PagingAndSortingRepository<User,Integer> {
 	 * @return
 	 * 
 	 */
-	@Query(value="select u "
-			+ "from user as u "
-			+ "join course_user on u.idUser = course_user.idUser "
-			+ "where course_user.idCourse= ?1", nativeQuery=true)
+	@Query(value="SELECT * "
+			+ "FROM USER as u "
+			+ "JOIN COURSE_USER on u.id_User = COURSE_USER.id_User "
+			+ "WHERE COURSE_USER.id_Course= ?1", nativeQuery=true)
 	public List<User> findByIdCourseUser(@Param(value = "idCourse") Integer idCourse);
 	
 }

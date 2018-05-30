@@ -59,10 +59,10 @@ public interface QuestionDao extends PagingAndSortingRepository<Question,Integer
 	 * @return
 	 * 
 	 */
-	@Query(value="select q"
-			+ "from question as q "
-			+ "join question_quiz on q.idQuestion = question_quiz.idQuestion "
-			+ "where question_quiz.idQuiz = ?1", nativeQuery=true)
+	@Query(value="SELECT * "
+			+ "FROM QUESTION as q "
+			+ "JOIN QUESTION_QUIZ on q.id_Question = QUESTION_QUIZ.id_Question "
+			+ "WHERE QUESTION_QUIZ.id_Quiz = ?1", nativeQuery=true)
 	public List<Question> findByIdQuizQuestion(@Param(value = "idQuiz") Integer idQuiz);
 	
 }
