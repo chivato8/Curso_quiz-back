@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping(value="/user")
+//@RequestMapping(value="/user")
 public class UserController {
 	
 	@Autowired
@@ -36,31 +36,31 @@ public class UserController {
 		return userservice.findAll(page,size);		
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/{idUser}")
+	@RequestMapping(method = RequestMethod.GET, value = "/user/{idUser}")
 	public UserDTO findOneByIdUser(@PathVariable Integer idUser) throws NotFoundException {
 		log.info("Recuperando Usuario con Id = " + idUser);
 		return userservice.findByIdUser(idUser);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/nameUser={nameUser}")
-	public List<UserDTO> findByName(@PathVariable String nameUser) throws NotFoundException{
+	@RequestMapping(method = RequestMethod.GET,value = "/user", params= {"nameUser"})
+	public List<UserDTO> findByName(@RequestParam("nameUser") String nameUser) throws NotFoundException{
 		log.info("Recuperando Usuario con Nombre = " + nameUser);
 		return userservice.findByName(nameUser);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/emailUser={emailUser}")
-	public UserDTO findByEmailUser(@PathVariable String emailUser)throws NotFoundException{
+	@RequestMapping(method = RequestMethod.GET,value = "/user", params= {"emailUser"})
+	public UserDTO findByEmailUser(@RequestParam("emailUser") String emailUser)throws NotFoundException{
 		log.info("Recuperando Usuario con Email = " + emailUser);
 		return userservice.findByEmailUser(emailUser);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/idCourse={idCourse}")
-	public List<UserDTO> findByIdCourseUser(@PathVariable Integer idCourse)throws NotFoundException{
+	@RequestMapping(method = RequestMethod.GET,value = "/course/{idCourse}/user")
+	public List<UserDTO> findByIdCourseUser(@PathVariable("idCourse") Integer idCourse)throws NotFoundException{
 		log.info("Recuperando Usuario por IdCourse = " + idCourse);
 		return userservice.findByIdCourseUser(idCourse);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, value = "/user")
 	public UserDTO create(@RequestBody UserDTO u) {
 		log.info("Creando Usuario");
 		log.info("Nombre: "+u.getNameUser());
@@ -72,7 +72,7 @@ public class UserController {
 		return mp.map(createUser);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "/{idUser}")
+	@RequestMapping(method = RequestMethod.PUT, value = "/user/{idUser}")
 	public UserDTO update(@PathVariable Integer idUser, @RequestBody UserDTO u)throws NotFoundException {
 		log.info("Modificando Usuario con ID: "+idUser);
 		log.info("Nombre: "+u.getNameUser());
@@ -86,7 +86,7 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, value = "/{idUser}")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/user/{idUser}")
 	public ConfirDTO delete(@PathVariable Integer idUser) throws NotFoundException {
 		log.info("Borrando Usuario con Id = " + idUser);
 		userservice.delete(idUser);

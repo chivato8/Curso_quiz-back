@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping(value="/question")
+//@RequestMapping(value="/question")
 public class QuestionController {
 
 	@Autowired
@@ -29,43 +29,43 @@ public class QuestionController {
 	@Autowired
 	MapperService mp;
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET, value="/question")
 	public List<QuestionDTO> findAll(@RequestParam(required=false, defaultValue="0") Integer page, @RequestParam(required=false, defaultValue="5") Integer size){
 		log.info("Recuperando toda la lista de Preguntas");
 		return questionservice.findAll(page,size);		
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/{idQuestion}")
+	@RequestMapping(method = RequestMethod.GET, value="/question/{idQuestion}")
 	public QuestionDTO findOneByIdQuestion(@PathVariable Integer idQuestion) throws NotFoundException {
 		log.info("Recuperando Pregunta con Id = " + idQuestion);
 		return questionservice.findByIdQuestion(idQuestion);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/idTag={idTag}")
-	public List<QuestionDTO> findByIdTag(@PathVariable Integer idTag) throws NotFoundException{
+	@RequestMapping(method = RequestMethod.GET, value="/tag/{idTag}/question")
+	public List<QuestionDTO> findByIdTag(@PathVariable("idTag") Integer idTag) throws NotFoundException{
 		log.info("Recuperando Pregunta con idTag = " + idTag);
 		return questionservice.findByIdTag((Integer)idTag);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/idDifficulty={idDifficulty}")
-	public List<QuestionDTO> findByIdDifficulty(@PathVariable Integer idDifficulty) throws NotFoundException{
+	@RequestMapping(method = RequestMethod.GET, value="/difficulty/{idDifficulty}/question")
+	public List<QuestionDTO> findByIdDifficulty(@PathVariable("idDifficulty") Integer idDifficulty) throws NotFoundException{
 		log.info("Recuperando Pregunta con idDifficulty = " + idDifficulty);
 		return questionservice.findByIdDifficulty(idDifficulty);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/idDifficulty={idDifficulty}/idTag={idTag}")
+	@RequestMapping(method = RequestMethod.GET, value="/difficylty/{idDifficulty}/tag/{idTag}/question")
 	public List<QuestionDTO> findByIdDifficultyAndIdTag(@PathVariable("idDifficulty")Integer idDifficulty,@PathVariable("idTag") Integer idTag) throws NotFoundException{
 		log.info("Recuperando Pregunta con idDifficulty = " + idDifficulty+ "y idTag = "+idTag);
 		return questionservice.findByIdDifficultyAndIdTag(idDifficulty,idTag);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "/idQuiz={idQuiz}")
-	public List<QuestionDTO> findByIdQuizQuestion(Integer idQuiz) throws NotFoundException {
+	@RequestMapping(method = RequestMethod.GET, value="/quiz/{idQuiz}/question")
+	public List<QuestionDTO> findByIdQuizQuestion(@PathVariable("idQuiz")Integer idQuiz) throws NotFoundException {
 		log.info("Recuperando Pregunta con idQuiz = " + idQuiz);
 		return questionservice.findByIdQuizQuestion(idQuiz);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST, value="/question")
 	public QuestionDTO create(@RequestBody QuestionDTO q)throws NotFoundException {
 		log.info("Creando Pregunta");
 		log.info("Text: "+q.getTextQuestion());
@@ -77,7 +77,7 @@ public class QuestionController {
 		return mp.map(createQuestion);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "/{idQuestion}")
+	@RequestMapping(method = RequestMethod.PUT, value="/question/{idQuestion}")
 	public QuestionDTO update(@PathVariable Integer idQuestion, @RequestBody QuestionDTO q)throws NotFoundException {
 		log.info("Modificando Pregunta con ID: "+idQuestion);
 		log.info("Text: "+q.getTextQuestion());
@@ -91,7 +91,7 @@ public class QuestionController {
 		
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE, value = "/{idQuestion}")
+	@RequestMapping(method = RequestMethod.DELETE, value="/question/{idQuestion}")
 	public ConfirDTO delete(@PathVariable Integer idQuestion) throws NotFoundException {
 		log.info("Borrando Pregunta con Id = " + idQuestion);
 		questionservice.delete(idQuestion);
