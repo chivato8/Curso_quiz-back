@@ -11,12 +11,12 @@ public class TagDTO implements Serializable{
 	
 	private static final long serialVersionUID = 6842809246747199840L;
 
-	@Mapping(value="id")
+	@Mapping(value="idTag")
 	private Integer idTag;
 	
-	@Mapping(value="name")
+	@Mapping(value="nameTag")
 	private String nameTag;
 	
-	@Mapping(value="description")
+	@Mapping(value="descriptionTag")
 	private String descriptionTag;
 }

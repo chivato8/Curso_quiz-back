@@ -11,10 +11,10 @@ public class QuestionDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1290930325019757891L;
 
-	@Mapping(value="id")
+	@Mapping(value="idQuestion")
 	private Integer idQuestion;
 	
-	@Mapping(value="text")
+	@Mapping(value="textQuestion")
 	private String textQuestion;
 	
 	@Mapping(value="idTag")
