@@ -36,7 +36,7 @@ public interface MapperService {
 	
 	public QuestionDTO map(Question q);
 	
-	public Quiz map(QuizDTO dto);
+	public Quiz map(QuizDTO dto) throws NotFoundException;
 	
 	public QuizDTO map(Quiz q);
 	

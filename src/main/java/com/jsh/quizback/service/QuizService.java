@@ -13,6 +13,8 @@ public interface QuizService {
 	
 	public QuizDTO findByIdQuiz(Integer idQuiz) throws NotFoundException;
 	
+	public List<QuizDTO> findByIdCourse(Integer idCourse) throws NotFoundException;
+	
 	public List<QuizDTO> findByDate(Date iniDate, Date endDate) throws NotFoundException;
 	
 	public List<QuizDTO> findByLevel(String levelQuiz) throws NotFoundException;
