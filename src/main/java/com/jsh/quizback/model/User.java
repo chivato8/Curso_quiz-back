@@ -9,8 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,15 +20,20 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
+@Table(
+indexes = { @Index(name = "UserIndex", columnList  = "nameUser,emailUser")}
+)
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idUser;
 
+	
 	@Column(unique = true, nullable = false)
 	private String nameUser;
 
+	
 	@Column(unique = true, nullable = false)
 	private String emailUser;
 
