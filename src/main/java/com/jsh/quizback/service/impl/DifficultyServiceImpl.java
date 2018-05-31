@@ -33,13 +33,13 @@ public class DifficultyServiceImpl implements DifficultyService{
 	@Override
 	public DifficultyDTO findByIdDifficulty(Integer idDifficulty) throws NotFoundException {
 		Difficulty difficulty=difficultydao.findByIdDifficulty(idDifficulty);
-		return mp.map(Optional.ofNullable(difficulty).orElseThrow(()->new NotFoundException(idDifficulty)));
+		return mp.map(Optional.ofNullable(difficulty).orElseThrow(()->new NotFoundException("IdDifficulty: "+idDifficulty)));
 	}
 
 	@Override
 	public DifficultyDTO findByLevelDifficulty(String levelDifficulty) throws NotFoundException {
 		Difficulty difficulty=difficultydao.findByLevelDifficulty(levelDifficulty);
-		return mp.map(Optional.ofNullable(difficulty).orElseThrow(()->new NotFoundException(levelDifficulty)));
+		return mp.map(Optional.ofNullable(difficulty).orElseThrow(()->new NotFoundException("levelDifficulty: "+levelDifficulty)));
 	}
 
 	@Override

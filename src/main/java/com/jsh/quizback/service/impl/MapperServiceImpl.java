@@ -20,6 +20,7 @@ import com.jsh.quizback.model.Quiz;
 import com.jsh.quizback.model.Result;
 import com.jsh.quizback.model.Tag;
 import com.jsh.quizback.model.User;
+import com.jsh.quizback.service.CourseService;
 import com.jsh.quizback.service.DifficultyService;
 import com.jsh.quizback.service.MapperService;
 import com.jsh.quizback.service.TagService;
@@ -35,6 +36,9 @@ public class MapperServiceImpl implements MapperService {
 	
 	@Autowired
 	DifficultyService difficyltyservice;
+	
+	@Autowired
+	CourseService courseservice;
 	
 	@Override
 	public Answer map(AnswerDTO dto){
@@ -80,7 +84,7 @@ public class MapperServiceImpl implements MapperService {
 	public Difficulty map(DifficultyDTO dto) {
 		final Difficulty difficulty=new Difficulty();
 		difficulty.setIdDifficulty(dto.getIdDifficulty());
-		difficulty.setLevelDifficuclty(dto.getLevelDifficulty());
+		difficulty.setLevelDifficulty(dto.getLevelDifficulty());
 		return difficulty;
 	}
 
@@ -121,13 +125,18 @@ public class MapperServiceImpl implements MapperService {
 	}
 
 	@Override
-	public Quiz map(QuizDTO dto) {
+	public Quiz map(QuizDTO dto) throws NotFoundException{
+		Course course;
+		course=map(courseservice.findByIdCourse(dto.getIdCourse()));
 		final Quiz quiz=new Quiz();
 		quiz.setIdQuiz(dto.getIdQuiz());
 		quiz.setDateQuiz(dto.getDateQuiz());
+		//log.info("level---1: "+dto.getLevelQuiz().toString());
 		quiz.setLevelQuiz(dto.getLevelQuiz().toString());
+		//log.info("level---1: "+quiz.getLevelQuiz().toString());
 		quiz.setDescriptionQuiz(dto.getDescriptionQuiz());
 		quiz.setNumQuestion(dto.getNumQuestion());
+		quiz.setCourse(course);
 		return quiz;
 	}
 
@@ -137,8 +146,11 @@ public class MapperServiceImpl implements MapperService {
 		dto.setIdQuiz(q.getIdQuiz());
 		dto.setDateQuiz(q.getDateQuiz());
 		dto.setDescriptionQuiz(q.getDescriptionQuiz());
+		//log.info("level---2: "+q.getLevelQuiz().toString());
 		dto.setLevelQuiz(q.getLevelQuiz().toString());
+		//log.info("level---2: "+dto.getLevelQuiz().toString());
 		dto.setNumQuestion(q.getNumQuestion());
+		dto.setIdCourse(q.getCourse().getIdCourse());
 		return dto;
 	}
 

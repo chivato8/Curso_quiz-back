@@ -17,7 +17,7 @@ import com.jsh.quizback.service.UserService;
 
 
 @Service
-public class UserServiceImpl implements UserService/*, InitializingBean*/ {
+public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	UserDao userdao;
@@ -40,13 +40,13 @@ public class UserServiceImpl implements UserService/*, InitializingBean*/ {
 	@Override
 	public List<UserDTO> findAll(Integer page, Integer size) {
 		List<User> user=(List<User>)userdao.findAll(PageRequest.of(page,size)).getContent();
-			return user.stream().map(u->mp.map(u)).collect(Collectors.toList());
+		return user.stream().map(u->mp.map(u)).collect(Collectors.toList());
 	}
 
 	@Override
 	public UserDTO findByIdUser(Integer idUser) throws NotFoundException {
 		User user=userdao.findByIdUser(idUser);
-		return mp.map(Optional.ofNullable(user).orElseThrow(()->new NotFoundException(idUser)));
+		return mp.map(Optional.ofNullable(user).orElseThrow(()->new NotFoundException("IdUser: "+idUser)));
 	}
 	
 	public List<UserDTO> findByName(String nameUser) throws NotFoundException{
@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService/*, InitializingBean*/ {
 	
 	public UserDTO findByEmailUser(String emailUser)throws NotFoundException{
 		User user=userdao.findByEmailUser(emailUser);
-		return mp.map(Optional.ofNullable(user).orElseThrow(()->new NotFoundException(emailUser)));
+		return mp.map(Optional.ofNullable(user).orElseThrow(()->new NotFoundException("emailUser: "+emailUser)));
 	}
 	
 	public List<UserDTO> findByIdCourseUser(Integer idCourse)throws NotFoundException{

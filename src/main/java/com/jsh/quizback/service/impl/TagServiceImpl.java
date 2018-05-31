@@ -33,7 +33,7 @@ public class TagServiceImpl implements TagService{
 	@Override
 	public TagDTO findByIdTag(Integer idTag) throws NotFoundException {
 		Tag tag=tagdao.findByIdTag(idTag);
-		return mp.map(Optional.ofNullable(tag).orElseThrow(()->new NotFoundException(idTag)));
+		return mp.map(Optional.ofNullable(tag).orElseThrow(()->new NotFoundException("IdTag: "+idTag)));
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class TagServiceImpl implements TagService{
 	@Override
 	public TagDTO findByName(String nameTag) throws NotFoundException {
 		Tag tag=tagdao.findByName(nameTag);
-		return mp.map(Optional.ofNullable(tag).orElseThrow(()->new NotFoundException(nameTag)));
+		return mp.map(Optional.ofNullable(tag).orElseThrow(()->new NotFoundException("nameTag: "+nameTag)));
 	}
 
 	@Override
