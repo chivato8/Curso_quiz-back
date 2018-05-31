@@ -38,4 +38,15 @@ public interface ResultDao extends PagingAndSortingRepository<Result,Integer> {
 			+ "from result as r "
 			+ "where r.idUser = ?1 and r.idQuiz = ?2", nativeQuery=true)
 	public List<Result> findByIdUserAndIdQuiz(@Param(value = "idUser")Integer idUser,@Param(value = "idQuiz")Integer idQuiz);
+	
+	@Query(value="SELECT * "
+			+ "FROM RESULT "
+			+ "WHERE id_Quiz = ?1", nativeQuery=true)
+	public List<Result> findByIdQuiz(@Param(value = "idQuiz")Integer idQuiz);
+	
+	
+	@Query(value="SELECT * "
+			+ "FROM RESULT "
+			+ "WHERE id_Quiz = ?1", nativeQuery=true)
+	public List<Result> findByResultCourse(@Param(value = "idQuiz")Integer idQuiz);
 }
