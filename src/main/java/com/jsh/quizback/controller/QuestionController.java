@@ -77,6 +77,12 @@ public class QuestionController {
 		return mp.map(createQuestion);
 	}
 	
+	@RequestMapping(method = RequestMethod.POST, value="/quiz/{idQuiz}/question/{idQuestion}")
+	public ConfirDTO saveCourseUser(@PathVariable("idQuiz")Integer idQuiz,@PathVariable("idQuestion") Integer idQuestion) throws NotFoundException {
+		log.info("Creando Pregunta_Cuestionario");
+		return questionservice.saveQuestionQuiz(idQuiz, idQuestion);
+	}
+	
 	@RequestMapping(method = RequestMethod.PUT, value="/question/{idQuestion}")
 	public QuestionDTO update(@PathVariable Integer idQuestion, @RequestBody QuestionDTO q)throws NotFoundException {
 		log.info("Modificando Pregunta con ID: "+idQuestion);
