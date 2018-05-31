@@ -3,10 +3,12 @@ package com.jsh.quizback.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jsh.quizback.model.Course;
 
@@ -21,9 +23,9 @@ public interface CourseDao extends PagingAndSortingRepository<Course,Integer> {
 	 * @return
 	 * 
 	 */
-	@Query(value ="select c "
-			+ "from course as c"
-			+ "where c.idCourse= ?1", nativeQuery=true)
+	@Query(value ="SELECT * "
+			+ "FROM COURSE "
+			+ "WHERE id_Course = ?1", nativeQuery=true)
 	public Course findByIdCourse(@Param(value = "idCourse")Integer idCourse);
 	
 	
@@ -63,10 +65,15 @@ public interface CourseDao extends PagingAndSortingRepository<Course,Integer> {
 	 * @return
 	 * 
 	 */
-	@Query(value="select c"
-			+ "from course as c "
-			+ "join course_user on c.idCourse = course_user.idCourse "
-			+ "where course_user.idUser = ?1", nativeQuery=true)
+	@Query(value="SELECT * "
+			+ "FROM COURSE as c "
+			+ "JOIN COURSE_USER on c.id_Course = COURSE_USER.id_Course "
+			+ "WHERE COURSE_USER.id_User = ?1", nativeQuery=true)
 	public List<Course> findByIdUserCourse(@Param(value = "idUser") Integer idUser);
+	
+	@Modifying
+	@Query(value = "INSERT INTO COURSE_USER (id_course,id_user) VALUES (?1,?2)", nativeQuery = true)
+	@Transactional
+	public void saveCourseUser(@Param("idCourse") Integer idCourse, @Param("idUser") Integer idUser);
 	
 }
