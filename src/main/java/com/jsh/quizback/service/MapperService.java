@@ -5,6 +5,7 @@ import com.jsh.quizback.dto.CourseDTO;
 import com.jsh.quizback.dto.DifficultyDTO;
 import com.jsh.quizback.dto.QuestionDTO;
 import com.jsh.quizback.dto.QuizDTO;
+import com.jsh.quizback.dto.QuizTagDTO;
 import com.jsh.quizback.dto.ResultDTO;
 import com.jsh.quizback.dto.TagDTO;
 import com.jsh.quizback.dto.UserDTO;
@@ -51,6 +52,7 @@ public interface MapperService {
 	public User map(UserDTO dto);
 	
 	public UserDTO map(User u);
-
+	
+	public QuizDTO map(QuizTagDTO qt);
 
 }

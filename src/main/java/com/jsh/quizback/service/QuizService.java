@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.jsh.quizback.dto.QuizDTO;
+import com.jsh.quizback.dto.QuizQuestionDTO;
 import com.jsh.quizback.exception.NotFoundException;
 import com.jsh.quizback.model.Quiz;
 
@@ -22,6 +23,8 @@ public interface QuizService {
 	public List<QuizDTO> findByIdTagQuiz(Integer idTag) throws NotFoundException;
 	
 	public Quiz create(Quiz q);
+	
+	public List<QuizQuestionDTO> saveQuizTag(Integer idTag, Integer idQuiz)throws NotFoundException;
 	
 	public void update(Quiz q);
 	

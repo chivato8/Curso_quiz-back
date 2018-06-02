@@ -10,15 +10,15 @@ public interface AnswerService {
 
 	public List<AnswerDTO> findAll(Integer page, Integer size);
 	
-	public Answer findByIdAnswer(Integer idAnswer) throws NotFoundException;
+	public AnswerDTO findByIdAnswer(Integer idAnswer) throws NotFoundException;
 	
-	public Answer findByIdQuestion(Integer idQuestion)throws NotFoundException;
+	public List<AnswerDTO> findByIdQuestion(Integer idQuestion)throws NotFoundException;
 	
-	public Answer findByIdQuestionCorrectAnswer(Integer idQuestion, String right) throws NotFoundException;
+	public AnswerDTO findByIdQuestionCorrectAnswer(Integer idQuestion, String right) throws NotFoundException;
 	
-	public AnswerDTO create(AnswerDTO a)throws NotFoundException;
+	public Answer create(Answer a)throws NotFoundException;
 	
-	public void update(AnswerDTO a)throws NotFoundException;
+	public void update(Answer a)throws NotFoundException;
 	
 	public void delete(Integer idAnswer) throws NotFoundException;
 	
