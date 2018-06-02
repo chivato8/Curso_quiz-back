@@ -8,6 +8,7 @@ import com.jsh.quizback.dto.CourseDTO;
 import com.jsh.quizback.dto.DifficultyDTO;
 import com.jsh.quizback.dto.QuestionDTO;
 import com.jsh.quizback.dto.QuizDTO;
+import com.jsh.quizback.dto.QuizTagDTO;
 import com.jsh.quizback.dto.ResultDTO;
 import com.jsh.quizback.dto.TagDTO;
 import com.jsh.quizback.dto.UserDTO;
@@ -213,7 +214,19 @@ public class MapperServiceImpl implements MapperService {
 		dto.setPasswordUser(u.getPasswordUser());
 		return dto;
 	}
-	
-	
+
+	@Override
+	public QuizDTO map(QuizTagDTO qt) {
+		final QuizDTO dto=new QuizDTO();
+		dto.setIdQuiz(qt.getIdQuiz());
+		dto.setDateQuiz(qt.getDateQuiz());
+		dto.setDescriptionQuiz(qt.getDescriptionQuiz());
+		//log.info("level---2: "+q.getLevelQuiz().toString());
+		dto.setLevelQuiz(qt.getLevelQuiz().toString());
+		//log.info("level---2: "+dto.getLevelQuiz().toString());
+		dto.setNumQuestion(qt.getNumQuestion());
+		dto.setIdCourse(qt.getIdCourse());
+		return dto;
+	}	
 	
 }
