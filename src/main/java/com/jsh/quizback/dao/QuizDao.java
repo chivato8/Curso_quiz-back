@@ -3,10 +3,12 @@ package com.jsh.quizback.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jsh.quizback.model.Quiz;
 
@@ -72,6 +74,11 @@ public interface QuizDao extends PagingAndSortingRepository<Quiz,Integer> {
 			+ "JOIN QUIZ_TAG on q.id_Quiz = QUIZ_TAG.id_Quiz "
 			+ "WHERE QUIZ_TAG.id_Tag = ?1", nativeQuery=true)
 	public List<Quiz> findByIdTagQuiz(@Param(value = "idTag") Integer idTag);
+	
+	@Modifying
+	@Query(value = "INSERT INTO QUIZ_TAG (id_tag,id_quiz) VALUES (?1,?2)", nativeQuery = true)
+	@Transactional
+	public void saveQuizTag(@Param("idTag") Integer idTag, @Param("idQuiz") Integer idQuiz);
 	
 	
 }
