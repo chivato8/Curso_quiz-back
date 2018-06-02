@@ -31,34 +31,32 @@ public class AnswerServiceImpl implements AnswerService {
 	}
 
 	@Override
-	public Answer findByIdAnswer(Integer idAnswer) throws NotFoundException {
-		Answer answer=answerdao.findByIdAnswer(idAnswer);
-		//return mp.map(Optional.ofNullable(answer).orElseThrow(()->new NotFoundException(idAnswer)));
-		return Optional.ofNullable(answer).orElseThrow(()->new NotFoundException(idAnswer));
+	public AnswerDTO findByIdAnswer(Integer idAnswer) throws NotFoundException {
+		final Answer answer=answerdao.findByIdAnswer(idAnswer);
+		return mp.map(Optional.ofNullable(answer).orElseThrow(()->new NotFoundException("idAnswer: "+idAnswer)));
 	}
 
 	@Override
-	public Answer findByIdQuestion(Integer idQuestion) throws NotFoundException {
-		Answer answer=answerdao.findByIdQuestion(idQuestion);
-		return Optional.ofNullable(answer).orElseThrow(()->new NotFoundException(idQuestion));
+	public List<AnswerDTO> findByIdQuestion(Integer idQuestion) throws NotFoundException {
+		final List<Answer> answer=(List<Answer>)answerdao.findByIdQuestion(idQuestion);
+		return answer.stream().map(q->mp.map(q)).collect(Collectors.toList());
 	}
 	
 	@Override
-	public Answer findByIdQuestionCorrectAnswer(Integer idQuestion, String right)throws NotFoundException {
+	public AnswerDTO findByIdQuestionCorrectAnswer(Integer idQuestion, String right)throws NotFoundException {
 		Answer answer=answerdao.findByIdQuestionCorrectAnswer(idQuestion,right);
-		return Optional.ofNullable(answer).orElseThrow(()->new NotFoundException(idQuestion));
+		return mp.map(Optional.ofNullable(answer).orElseThrow(()->new NotFoundException("idQuestion: "+idQuestion)));
 	}
 
 	@Override
-	public AnswerDTO create(AnswerDTO a) throws NotFoundException{
-		final Answer answer = answerdao.save(mp.map(a));
-		return mp.map(answer);
+	public Answer create(Answer a) throws NotFoundException{
+		return answerdao.save(a);
+
 	}
 
 	@Override
-	public void update(AnswerDTO a) throws NotFoundException {
-		final Answer answer = answerdao.save(mp.map(a));
-		mp.map(answer);
+	public void update(Answer a) throws NotFoundException {
+		answerdao.save(a);
 		
 	}
 
