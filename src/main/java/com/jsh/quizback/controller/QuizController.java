@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.jsh.quizback.dto.ConfirDTO;
 import com.jsh.quizback.dto.QuizDTO;
+import com.jsh.quizback.dto.QuizQuestionDTO;
+import com.jsh.quizback.dto.QuizTagDTO;
 import com.jsh.quizback.exception.NotFoundException;
 import com.jsh.quizback.model.Quiz;
 import com.jsh.quizback.service.MapperService;
@@ -69,17 +71,19 @@ public class QuizController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value="/quiz")
-	public QuizDTO create(@RequestBody QuizDTO q)throws NotFoundException {
+	public List<QuizQuestionDTO> create(@RequestBody QuizTagDTO q)throws NotFoundException {
 		log.info("Creando Cuestionario");
 		log.info("dateQuiz: "+q.getDateQuiz());
 		log.info("levelQuiz: "+q.getLevelQuiz());
 		log.info("descriptionQuiz: "+q.getDescriptionQuiz());
 		log.info("numQuestion: "+q.getNumQuestion());
 		log.info("idCourse: "+q.getIdCourse());
-		final Quiz quiz = mp.map(q);
+		log.info("idTag: "+q.getIdTag());
+		QuizDTO dto=mp.map(q);
+		final Quiz quiz = mp.map(dto);
 		final Quiz createQuiz = quizservice.create(quiz);
 		log.info("Creando Cuestionario = " + q.getDescriptionQuiz());
-		return mp.map(createQuiz);
+		return quizservice.saveQuizTag(q.getIdTag(),createQuiz.getIdQuiz());
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT, value="/quiz/{idQuiz}")
