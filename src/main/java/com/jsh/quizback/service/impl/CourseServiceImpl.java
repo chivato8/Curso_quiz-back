@@ -9,7 +9,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.jsh.quizback.dao.CourseDao;
-import com.jsh.quizback.dao.UserDao;
 import com.jsh.quizback.dto.ConfirDTO;
 import com.jsh.quizback.dto.CourseDTO;
 import com.jsh.quizback.exception.NotFoundException;

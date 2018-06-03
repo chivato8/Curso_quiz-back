@@ -11,7 +11,9 @@ public interface QuizQuestionService {
 	
 	public List<QuizQuestionDTO> findByIdQuiz(Integer idQuiz) throws NotFoundException;
 	
-	public void saveQuizTag(String correct, Integer idQuestion, Integer idQuiz, String textanswer, String textquestion);
+	public void saveQuizTag(String correct, Integer idQuestion, Integer idQuiz, String textanswer, String textquestion, Integer numberquestion);
 	
 	public List<QuizQuestionDTO> AllQuizQuestion(Integer idQuiz) throws NotFoundException;
+	
+	public QuizQuestionDTO findByNumberQuestion(Integer idQuiz, Integer numberquestion)throws NotFoundException;
 }

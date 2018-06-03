@@ -22,9 +22,16 @@ public class QuizQuestionController {
 	QuizQuestionService quizquestionservice;
 	
 	@RequestMapping(method = RequestMethod.GET, value="/quiz/{idQuiz}/questionquiz")
-	public List<QuizQuestionDTO> QuizQuestion1a1(@PathVariable("idQuiz")Integer idQuiz) throws NotFoundException {
-		log.info("Generando Cuestionario con Preguntas 1 a 1 cada 30 Segundos");
+	public List<QuizQuestionDTO> AllQuizQuestion(@PathVariable("idQuiz")Integer idQuiz) throws NotFoundException {
+		log.info("Mostrando Cuestionario");
 		List<QuizQuestionDTO>question_quiz=quizquestionservice.AllQuizQuestion(idQuiz);
+		return question_quiz;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/quiz/{idQuiz}/questionquiz/{numberquestion}")
+	public QuizQuestionDTO QuizQuestion1a1(@PathVariable("idQuiz")Integer idQuiz,@PathVariable("numberquestion")Integer numberquestion) throws NotFoundException {
+		log.info("Mostrando Pregunta");
+		QuizQuestionDTO question_quiz=quizquestionservice.findByNumberQuestion(idQuiz,numberquestion);
 		return question_quiz;
 	}
 }

@@ -21,7 +21,13 @@ public interface QuizQuestionDao extends PagingAndSortingRepository<QuizQuestion
 	public List<QuizQuestion> findByIdQuiz(@Param(value = "idQuiz")Integer idQuiz);
 	
 	@Modifying
-	@Query(value = "INSERT INTO QUIZ_QUESTION (correct,id_question,id_quiz,textanswer,textquestion) VALUES (?1,?2,?3,?4,?5)", nativeQuery = true)
+	@Query(value = "INSERT INTO QUIZ_QUESTION (correct,id_question,id_quiz,textanswer,textquestion,numberquestion) VALUES (?1,?2,?3,?4,?5,?6)", nativeQuery = true)
 	@Transactional
-	public void saveQuizTag(@Param("correct") String correct, @Param("idQuestion") Integer idQuestion,@Param("idQuiz") Integer idQuiz, @Param("textanswer") String textanswer, @Param("textquestion") String textquestion);
+	public void saveQuizTag(@Param("correct") String correct, @Param("idQuestion") Integer idQuestion,@Param("idQuiz") Integer idQuiz, @Param("textanswer") String textanswer,@Param("textquestion") String textquestion, @Param("numberquestion") Integer numberquestion);
+	
+	
+	@Query(value="SELECT * "
+			+ "FROM QUIZ_QUESTION "
+			+ "WHERE id_Quiz = ?1 AND numberquestion = ?2", nativeQuery=true)
+	public List<QuizQuestion> findByNumberQuestion(@Param(value = "idQuiz")Integer idQuiz,@Param(value = "numberquestion")Integer numberquestion);
 }

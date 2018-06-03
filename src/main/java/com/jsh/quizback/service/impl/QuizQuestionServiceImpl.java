@@ -47,28 +47,26 @@ public class QuizQuestionServiceImpl implements QuizQuestionService {
 		QuizQuestion quizquestion =new QuizQuestion();
 		String[] abecedario = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
 				"K", "L", "M","N","O","P","Q","R","S","T","U","V","W", "X","Y","Z" };
-		log.info("Numero de Preguntas: "+questionservice.findByIdQuizQuestion(idQuiz).size());
+		
 		for(int i=0;i<questionservice.findByIdQuizQuestion(idQuiz).size();i++)
 		{
 			quizquestion.setIdQuiz(idQuiz);
 			quizquestion.setIdQuestion(questions.get(i).getIdQuestion());
 			quizquestion.setTextquestion(questions.get(i).getTextQuestion());
-			log.info("Pregunta: "+quizquestion.getTextquestion());
 			answer=answerservice.findByIdQuestion(questions.get(i).getIdQuestion());
 			for(int j=0;j<4;j++)
 			{
-				log.info("Tamaño Respuesta: "+answer.size());
+				quizquestion.setNumberquestion(i);
 				aleatorio=random.nextInt(answer.size());
-				log.info("Numero Aleatorio: "+aleatorio);
 				quizquestion.setTextanswer(abecedario[j]+") "+answer.get(aleatorio).getTextAnswer());
-				log.info("Respuesta: "+quizquestion.getTextanswer());
 				quizquestion.setCorrect(answer.get(aleatorio).getCorrectAnswer());
 				answer.remove(answer.get(aleatorio));
 				quizquestiondao.saveQuizTag(quizquestion.getCorrect(), 
 						quizquestion.getIdQuestion(), 
 						quizquestion.getIdQuiz(), 
 						quizquestion.getTextanswer(), 
-						quizquestion.getTextquestion());
+						quizquestion.getTextquestion(),
+						quizquestion.getNumberquestion());
 			}	
 		}
 		return AllQuizQuestion(idQuiz);
@@ -81,8 +79,8 @@ public class QuizQuestionServiceImpl implements QuizQuestionService {
 	}
 	
 	@Override
-	public void saveQuizTag(String correct, Integer idQuestion, Integer idQuiz, String textanswer, String textquestion){
-		quizquestiondao.saveQuizTag(correct, idQuestion, idQuiz, textanswer, textquestion);
+	public void saveQuizTag(String correct, Integer idQuestion, Integer idQuiz, String textanswer, String textquestion, Integer numberquestion){
+		quizquestiondao.saveQuizTag(correct, idQuestion, idQuiz, textanswer, textquestion, numberquestion);
 
 	}
 
@@ -95,7 +93,6 @@ public class QuizQuestionServiceImpl implements QuizQuestionService {
 		for(int i=0;i<quizquestion.size();i=i+answerservice.findByIdQuestion(quizquestion.get(i).getIdQuestion()).size())
 		{
 			dto =new QuizQuestionDTO();
-			log.info("Contador---: "+quizquestion.get(i).getTextquestion());
 			dto.setTextquestion(quizquestion.get(i).getTextquestion());
 			log.info("Pregunta: "+dto.getTextquestion());
 			for(int j=0;j<1;j++)
@@ -112,5 +109,22 @@ public class QuizQuestionServiceImpl implements QuizQuestionService {
 			quizquestiondto.add(dto);
 		}
 		return quizquestiondto;
+	}
+
+	@Override
+	public QuizQuestionDTO findByNumberQuestion(Integer idQuiz, Integer numberquestion)throws NotFoundException {
+		List<QuizQuestion> quizquestion=quizquestiondao.findByNumberQuestion(idQuiz, numberquestion);
+		QuizQuestionDTO dto =new QuizQuestionDTO();
+		dto.setTextquestion(quizquestion.get(0).getTextquestion());
+		log.info("Pregunta: "+dto.getTextquestion());
+		dto.setTextanswer1(quizquestion.get(0).getTextanswer());
+		dto.setTextanswer2(quizquestion.get(1).getTextanswer());
+		dto.setTextanswer3(quizquestion.get(2).getTextanswer());
+		dto.setTextanswer4(quizquestion.get(3).getTextanswer());
+		log.info("Respuesta: "+dto.getTextanswer1());
+		log.info("Respuesta: "+dto.getTextanswer2());
+		log.info("Respuesta: "+dto.getTextanswer3());
+		log.info("Respuesta: "+dto.getTextanswer4());
+		return dto;
 	}
 }

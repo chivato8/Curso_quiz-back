@@ -26,9 +26,6 @@ import com.jsh.quizback.service.DifficultyService;
 import com.jsh.quizback.service.MapperService;
 import com.jsh.quizback.service.TagService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class MapperServiceImpl implements MapperService {
 

@@ -29,6 +29,9 @@ public class QuizQuestion implements Serializable {
 	Integer idQuestion;
 	
 	@Column(nullable = false)
+	Integer numberquestion;
+	
+	@Column(nullable = false)
 	String textquestion;
 	
 	@Column(nullable = false)
