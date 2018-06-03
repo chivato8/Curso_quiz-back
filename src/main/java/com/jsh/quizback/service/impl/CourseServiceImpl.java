@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.jsh.quizback.dao.CourseDao;
@@ -31,7 +30,7 @@ public class CourseServiceImpl implements CourseService {
 	private MapperService mp;
 	
 	@Override
-	public List<CourseDTO> findAll(Integer page, Integer size) {
+	public List<CourseDTO> findAll() {
 		List<Course> course=(List<Course>)coursedao.findAll();
 		return course.stream().map(c->mp.map(c)).collect(Collectors.toList());
 	}

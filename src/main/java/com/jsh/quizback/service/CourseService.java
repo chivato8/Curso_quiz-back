@@ -9,7 +9,7 @@ import com.jsh.quizback.model.Course;
 
 public interface CourseService {
 
-	public List<CourseDTO> findAll(Integer page, Integer size);
+	public List<CourseDTO> findAll();
 	
 	public CourseDTO findByIdCourse(Integer idCourse) throws NotFoundException;
 	

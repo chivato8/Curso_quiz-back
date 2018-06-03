@@ -4,14 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jsh.quizback.dto.ConfirDTO;
 import com.jsh.quizback.dto.CourseDTO;
 import com.jsh.quizback.exception.NotFoundException;
+import com.jsh.quizback.model.Course;
 import com.jsh.quizback.service.CourseService;
 import com.jsh.quizback.service.MapperService;
 
@@ -28,9 +29,9 @@ public class CourseController {
 	MapperService mp;
 	
 	@RequestMapping(method = RequestMethod.GET, value="/course")
-	public List<CourseDTO> findAll(@RequestParam(required=false, defaultValue="0") Integer page, @RequestParam(required=false, defaultValue="5") Integer size){
+	public List<CourseDTO> findAll(){
 		log.info("Recuperando toda la lista de Cursos");
-		return courseservice.findAll(page,size);		
+		return courseservice.findAll();		
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value="/course/{idCourse}")
@@ -50,5 +51,27 @@ public class CourseController {
 		log.info("Creando Curso_Usuario");
 		return courseservice.saveCourseUser(idCourse, idUser);
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/course")
+	public CourseDTO create(@RequestBody CourseDTO c) {
+		final Course course = mp.map(c);
+		final Course createcourse = courseservice.create(course);
+		return mp.map(createcourse);
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT, value = "/course/{idCourse}")
+	public CourseDTO update(@PathVariable Integer idCourse, @RequestBody CourseDTO c)throws NotFoundException {
+		c.setIdCourse(idCourse);
+		final Course course = mp.map(c);
+		course.setIdCourse(idCourse);
+		courseservice.update(course);
+		return courseservice.findByIdCourse(idCourse);
+		
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = "/course/{idCourse}")
+	public void delete(@PathVariable Integer idCourse) throws NotFoundException {
+		courseservice.delete(idCourse);
+	}	
 	
 }
