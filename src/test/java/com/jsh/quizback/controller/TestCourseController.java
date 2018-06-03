@@ -88,15 +88,9 @@ public class TestCourseController {
 		Assert.assertNotNull(res);
 		Assert.assertEquals(coursedto, res);
 	}
-	
-	@Test(expected = NotFoundException.class)
-	public void TestfindByIdWrong()throws NotFoundException
-	{
-		coursecontroller.findByIdCourse(12);
-	}
 		
 	@Test
-	public void TestCreateFine()throws NotFoundException
+	public void TestCreateFine()
 	{
 		final CourseDTO res = coursecontroller.create(coursedto);
 		Assert.assertNotNull(res);
@@ -105,30 +99,21 @@ public class TestCourseController {
 		Assert.assertEquals(course.getLevelCourse(), res.getLevelCourse());	
 	}
 	
-	/*@Test(expected = NotFoundException.class)
+	@Test(expected = NotFoundException.class)
 	public void TestCreateWrong()throws NotFoundException
 	{
 		courseservice.create(new Course());
 		Assert.assertEquals(courseservice.create(new Course()), null);
-	}*/
+	}
 	
 	@Test
 	public void TestUpdateFine() {
 		courseservice.update(course);
 	}
 	
-	/*@Test(expected = NotFoundException.class)
-	public void TestUpdateWrong() throws NotFoundException{
-		courseservice.update(new Course());
-	}*/
-	
 	@Test
 	public void TestDeleteFine() {
 		courseservice.delete(idCourse);
 	}
 	
-	/*@Test(expected = NotFoundException.class)
-	public void TestDeleteWrong() throws NotFoundException {
-		courseservice.delete(-1);
-	}*/
 }
