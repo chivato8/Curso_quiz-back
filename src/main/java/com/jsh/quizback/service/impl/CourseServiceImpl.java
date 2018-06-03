@@ -32,7 +32,7 @@ public class CourseServiceImpl implements CourseService {
 	
 	@Override
 	public List<CourseDTO> findAll(Integer page, Integer size) {
-		List<Course> course=(List<Course>)coursedao.findAll(PageRequest.of(page,size)).getContent();
+		List<Course> course=(List<Course>)coursedao.findAll();
 		return course.stream().map(c->mp.map(c)).collect(Collectors.toList());
 	}
 	
